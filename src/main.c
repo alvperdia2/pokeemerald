@@ -22,6 +22,7 @@
 #include "text.h"
 #include "intro.h"
 #include "main.h"
+#include "pe3d_bridge.h"
 #include "trainer_hill.h"
 #include "constants/rgb.h"
 
@@ -93,6 +94,7 @@ void AgbMain(void)
 #if !MODERN
     RegisterRamReset(RESET_ALL);
 #endif //MODERN
+    PE3DBridge_Init();
     *(vu16 *)BG_PLTT = RGB_WHITE; // Set the backdrop to white on startup
     InitGpuRegManager();
     REG_WAITCNT = WAITCNT_PREFETCH_ENABLE | WAITCNT_WS0_S_1 | WAITCNT_WS0_N_3;
@@ -131,7 +133,7 @@ void AgbMain(void)
     for (;;)
     {
         ReadKeys();
-
+	PE3DBridge_Update();
         if (gSoftResetDisabled == FALSE
          && JOY_HELD_RAW(A_BUTTON)
          && JOY_HELD_RAW(B_START_SELECT) == B_START_SELECT)
