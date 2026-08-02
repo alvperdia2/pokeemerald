@@ -3,9 +3,11 @@
 
 #include "global.h"
 
-#define PE3D_BRIDGE_MAGIC          0x44334550
-#define PE3D_PROTOCOL_MAJOR        1
-#define PE3D_PROTOCOL_MINOR        0
+#define PE3D_BRIDGE_MAGIC           0x44334550
+#define PE3D_PROTOCOL_MAJOR         1
+#define PE3D_PROTOCOL_MINOR         1
+
+#define PE3D_STATUS_OVERWORLD       (1 << 0)
 
 struct PE3DBridge
 {
@@ -14,6 +16,19 @@ struct PE3DBridge
     u16 protocolMinor;
     u32 structureSize;
     u32 frameCounter;
+
+    u8 status;
+    u8 mapGroup;
+    u8 mapNum;
+    u8 elevation;
+
+    s16 playerX;
+    s16 playerY;
+
+    u8 facingDirection;
+    u8 movementDirection;
+    u8 avatarFlags;
+    u8 reserved;
 };
 
 extern volatile struct PE3DBridge gPE3DBridge;
